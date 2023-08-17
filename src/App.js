@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Button from './components/Button';
-
+import "./css/style.css";
 
 class App extends Component{
   constructor(props){
@@ -18,6 +18,7 @@ reset =() => {
 
 addToCurrent =(symbol) =>{
   console.log("symbol");
+
   this.setState({current:this.state.current + symbol});
 }
 render() {
@@ -47,7 +48,7 @@ render() {
     
 
     {buttons.map((btn, i) =>{
-      return <Button key={i}symbol={btn.symbol} cols={btn.cols} action={(symbol)=> btn.action}/>
+      return <Button key={i}symbol={btn.symbol} cols={btn.cols} action={(symbol) => btn.action(symbol)}/>
     })
 
     }
