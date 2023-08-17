@@ -44,6 +44,10 @@ render() {
   ];
   return (
     <div className="App">
+      {this.state.previous.length >0 ?
+      <div className = "floaty-this">{this.state.previous[this.state.previous.length - 1]
+ </div>
+ :null}
    <input className="result" type="text" value={this.state.current}/>
     
 
