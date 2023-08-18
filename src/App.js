@@ -8,12 +8,13 @@ class App extends Component{
 
     this.state ={
       current: '0',
-      previous:[]
+      previous:[],
+      nextIsReset:false
     }
   }
 
 reset =() => {
-  this.setState({result:'0'});
+  this.setState({current:'0', previous: [], nextIsReset:false});
 }
 
 addToCurrent =(symbol) =>{
@@ -21,10 +22,11 @@ addToCurrent =(symbol) =>{
 if (["/", "-", "+", "x"].indexOf(symbol) > -1){
 let {previous} = this.state;
 previous.push(this.state.current + symbol);
-this.setState({previous});
+this.setState({previous,nextIsReset:true});
 }else{
-  if(this.state.current === "0" && symbol !== "."){
-  this.setState({current: symbol});
+
+  if((this.state.current === "0" && symbol !== ".") || this.state.nextIsReset){
+  this.setState({current: symbol, nextIsReset:false});
 }else{
   this.setState({current: this.state.current + symbol});
 }
