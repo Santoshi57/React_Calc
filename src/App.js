@@ -13,13 +13,18 @@ class App extends Component{
   }
 
 reset =() => {
-  this.setState({result:0});
+  this.setState({result:'0'});
 }
 
 addToCurrent =(symbol) =>{
   console.log("symbol");
-
+if (["/", "-", "+", "x"].indexOf(symbol) > -1){
+let {previous} = this.state;
+previous.concat(this.state.current + symbol);
+this.setState({previous});
+}else{
   this.setState({current:this.state.current + symbol});
+}
 }
 render() {
   const buttons =[
@@ -45,9 +50,9 @@ render() {
   return (
     <div className="App">
       {this.state.previous.length >0 ?
-      <div className = "floaty-this">{this.state.previous[this.state.previous.length - 1]
- </div>
- :null}
+      <div className = "floaty-this">{this.state.previous[this.state.previous.length -1]}</div>
+    :null}
+   
    <input className="result" type="text" value={this.state.current}/>
     
 
