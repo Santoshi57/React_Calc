@@ -20,10 +20,14 @@ addToCurrent =(symbol) =>{
   console.log("symbol");
 if (["/", "-", "+", "x"].indexOf(symbol) > -1){
 let {previous} = this.state;
-previous.concat(this.state.current + symbol);
+previous.push(this.state.current + symbol);
 this.setState({previous});
 }else{
-  this.setState({current:this.state.current + symbol});
+  if(this.state.current === "0" && symbol !== "."){
+  this.setState({current: symbol});
+}else{
+  this.setState({current: this.state.current + symbol});
+}
 }
 }
 render() {
@@ -53,7 +57,7 @@ render() {
       <div className = "floaty-this">{this.state.previous[this.state.previous.length -1]}</div>
     :null}
    
-   <input className="result" type="text" value={this.state.current}/>
+   <input className="result" type="text" value = {this.state.current}/>
     
 
     {buttons.map((btn, i) =>{
