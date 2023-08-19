@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React,{Component} from 'react';
 import Button from './components/Button';
 import "./css/style.css";
@@ -32,6 +33,15 @@ this.setState({previous,nextIsReset:true});
 }
 }
 }
+
+calculate = (symbol) =>{
+  let {current, previous, nextIsReset} = this.state;
+  if(previous.length > 0){
+
+    // eslint-disable-next-line no-eval
+    current = eval(String(previous[previous.length -1] + current ));
+  }
+}
 render() {
   const buttons =[
       {symbol: 'C',cols: 3, action:this.reset},
@@ -50,7 +60,7 @@ render() {
       {symbol: '+', cols:1, action:this.addToCurrent},
       {symbol: '0', cols:1, action:this.addToCurrent},
       {symbol: '.', cols:1, action:this.addToCurrent},
-      {symbol: '=', cols:1, action:this.addToCurrent}
+      {symbol: '=', cols:1, action: this.calculate}
 
   ];
   return (
